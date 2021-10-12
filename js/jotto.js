@@ -123,6 +123,15 @@ function userTried(inputUtente) {
   // TODO: Non funziona come dovrebbe. Risolvere
 }
 
+// Funzione per  lunghezza dell'input che deve essere di 5 caratteri.
+function imputUtente() {
+  if (imputUtente.length < 0 != 5) {
+    return imputUtente
+  }
+}
+
+imputUtente();
+
 
 /**
  * Conta la lettere corrette presenti nella parola da indovinare.
@@ -146,8 +155,8 @@ function countCorrectLetters(inputUtente) {
       count++;
     }
   });
-
   return (count >= 5) ? count - 1 : count;
+
   // Essendo 5 l'unica casistica non affrontabile a questo punto (perché avremmo già vinto altrimenti o le due parole sono anagrammi), se il conteggio risulta maggiore uguale a 5, significa che ci sono delle doppie che vengono calcolate e quindi ha senso sottrarre 1.
 }
 
@@ -166,6 +175,7 @@ function isAnagram(word1, word2) {
 
   return word1 === word2;
 }
+
 
 /**
  * Restituisce un nuovo array escludendo le lettere duplicate.
