@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jotto</title>
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <!-- Con JS renderizzeremo le lettere dell'alfabeto. Questa sezione sarà utile all'utente
+    per segnarsi le parole che pensa siano corrette, in forse o da escludere. -->
+    <section class="alphabet"></section>
+    <!-- Area di Gioco principale dove l'utente digiterà le parole che reputa corrette. -->
+    <section class="game">
+      <div class="input-group">
+        <!-- novalidate disabilita la validazione da parte del browser. Sarà quindi gestita
+        interamente lato JavaScript. -->
+        <form class="guess-form" novalidate>
+          <!--
+            minlength = imposta una lunghezza minima dell'input
+            maxlength = imposta una lunghezza massima dell'input
+          -->
+          <input
+            type="text"
+            minlength="5"
+            maxlength="5"
+            required
+            placeholder="Qual è la parola nascosta?"
+          />
+          <div class="button-group">
+            <!-- Pulsante di resa che concludere la partita -->
+            <button class="btn give-up">Mi Arrendo!</button>
+            <!-- Pulsante che attiva il controllo delle parola con quella da indovinare.  -->
+            <input type="submit" value="Indovina!" class="btn guess" />
+          </div>
+        </form>
+      </div>
+      <!-- Tentativi svolti con parole e conteggio di lettere corrette. -->
+      <div class="attempts">
+        <div class="attempts__header">
+          <div class="words">Parola</div>
+          <div class="counts">Conteggio</div>
+        </div>
+        <!-- Qui verranno inseriti le parole e i conteggio. -->
+        <div class="attempts__body"></div>
+      </div>
+    </section>
+    <!-- Schermata di vittoria. Comparirà solo se l'utente avrà indovinato la parola. -->
+    <section class="win-screen">
+      <h1>🎉 Hai Vinto! 🎉</h1>
+      <button class="btn play-again">Gioca di Nuovo</button>
+    </section>
+    <!-- Schermata di resa. Comparirà solo se l'utente cliccherà il pulsante di give-up -->
+    <section class="give-up-screen">
+      <h1>Spiacente! 😔</h1>
+      <p>La parola era: <span class="word-not-guessed"></span></p>
+      <button class="btn play-again">Gioca di Nuovo</button>
+    </section>
+    <script src="js/jotto.js"></script>
+  </body>
+</html>

@@ -1,0 +1,231 @@
+/* Dichiarazione delle CSS Custom Properties (AKA CSS Variables) */
+:root {
+  --color-primary: #3498db;
+  --color-primary--dark: #2980b9;
+  --color-danger: #e74c3c;
+  --color-warning: #e67e22;
+  --color-success: #2ecc71;
+  --color-shades-00: #ffffff;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+}
+
+.alphabet {
+  display: flex;
+  flex-wrap: wrap; /* Manda a capo gli elementi flex, mantenendo la loro dimensione naturale. Di default li "sforma" adattandoli allo spazio a disposizione. */
+  justify-content: center;
+  gap: 20px;
+  width: 70%;
+  margin: 50px auto;
+}
+
+.alphabet .letter {
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-primary); /* 👈 Richiama una variabile CSS */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--color-shades-00);
+  font-weight: bold;
+  user-select: none; /* Evita che l'utente possa selezionare il testo all'interno della casella con la lettera */
+}
+
+/* Selettori di attributo in base allo stato della lettera */
+.alphabet .letter[data-state="1"] {
+  background-color: var(--color-danger);
+}
+
+.alphabet .letter[data-state="2"] {
+  background-color: var(--color-warning);
+}
+
+.alphabet .letter[data-state="3"] {
+  background-color: var(--color-success);
+}
+
+.game {
+  width: 50%;
+  margin: 50px auto;
+}
+
+.guess-form input[type="text"] {
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  border: 4px solid var(--color-primary);
+  border-radius: 10px;
+  outline: 0; /* toglie il bordo nero quando l'input è in stato di focus */
+  transition: all 0.2s ease;
+}
+
+.guess-form input[type="text"]:focus {
+  box-shadow: 0px 0px 0px 5px rgba(52, 152, 219, 0.2); /* x y blu estensione colore */
+}
+
+.guess-form .button-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 25px;
+  gap: 40px;
+}
+
+.btn {
+  width: 100%;
+  padding: 2rem;
+  border: 0;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.guess-form .button-group .btn.guess {
+  background-color: var(--color-primary);
+  color: var(--color-shades-00);
+}
+
+.guess-form .button-group .btn.guess:hover {
+  background: var(--color-primary--dark);
+}
+
+.guess-form .button-group .btn.give-up {
+  color: var(--color-danger);
+}
+
+.guess-form .button-group .btn.give-up:hover {
+  background-color: var(--color-danger);
+  color: var(--color-shades-00);
+}
+
+.attempts {
+  width: 50%;
+  margin: 50px auto;
+  font-size: 2rem;
+  border: 2px solid var(--color-primary);
+  border-radius: 10px;
+}
+
+.attempts > .attempts__header {
+  display: grid;
+  grid-template-columns: 1fr 150px;
+}
+
+.attempts > .attempts__body {
+  display: flex;
+  flex-direction: column-reverse; /* Mostra i tentativi al contrario nella tabella dei tentativi. */
+  height: 250px;
+  overflow-y: scroll; /* Mostra la scrollbar se il contenuto della tabella dovesse superare i 250px (height) */
+}
+
+.attempts .attempt {
+  display: grid;
+  grid-template-columns: 1fr 150px;
+}
+
+.attempts .words,
+.attempts .counts {
+  padding: 15px;
+}
+
+.attempts .attempt:not(:first-child) {
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.attempts__header > * {
+  font-weight: bold;
+  background-color: var(--color-primary);
+  color: var(--color-shades-00);
+}
+
+.attempts .words {
+  border-right: 2px solid var(--color-primary);
+}
+
+/* Personalizzazione della scrollbar */
+/* Larghezza della scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Tracciato della scrollbar */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Rettangolino della scrollbar che ci dice a che punto siamo della pagina */
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 10px;
+}
+
+/* Stato di hover del rettangolino. */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary--dark);
+}
+
+.win-screen,
+.give-up-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-success);
+  color: var(--color-shades-00);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.win-screen h1,
+.give-up-screen h1 {
+  font-size: 4rem;
+}
+
+.win-screen .btn,
+.give-up-screen .btn {
+  background-color: var(--color-shades-00);
+  color: var(--color-success);
+  width: 350px;
+}
+
+.win-screen[hidden],
+.give-up-screen[hidden] {
+  display: none;
+}
+
+.give-up-screen {
+  background-color: var(--color-danger);
+}
+
+.give-up-screen .btn {
+  color: var(--color-danger);
+}
+
+.give-up-screen p {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
